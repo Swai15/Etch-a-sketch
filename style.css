@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  background: rgb(131, 74, 84);
+
+}
+
+/* top div */
+.top-info {
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  background: rgb(36, 100, 121);
+  color: white;
+  margin-top: 2em;
+
+}
+
+
+/* Grid div */
+.squares {
+  background: grey;
+  border: 1px solid white;
+}
+
+.squares:hover {
+  background: rgb(122, 84, 90);
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 4em;
+
+
+
+}

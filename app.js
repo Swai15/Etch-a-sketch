@@ -1,11 +1,16 @@
-// Function that repeats the rows and columns
-//Within for loop, create the divs
-//Make grid resizable within the same space -yet
+//Function that repeats the rows and columns according to user input
+//Within for loop, create the divs, add class and append
+//Make any grid resizable within the same space
+//change color of squares
 
-function buildGrids(x, y, cellSize, parent) {
+let container = document.querySelector(".container");
+
+//build grid function
+function buildGrids(x, y, parent) {
   parent.style.display = "grid";
-  parent.style.gridTemplateColumns = `repeat(${x}, ${cellSize}px)`;
-  parent.style.gridTemplateRows = `repeat(${y}, ${cellSize}px)`;
+
+  parent.style.setProperty("--grid-rows", x);
+  parent.style.setProperty("--grid-columns", y);
 
   let gridStructure = new DocumentFragment();
 
@@ -17,17 +22,30 @@ function buildGrids(x, y, cellSize, parent) {
 
   parent.appendChild(gridStructure);
 }
+// buildGrids(16, 16, container);
 
-buildGrids(16, 16, 30, document.querySelector(".container"));
-
-const btn = document.querySelector(".btn");
-btn.addEventListener("click", (event) => {
-  let input = prompt("Enter the number of squares you want per side");
-  if (Number.isInteger(+input)) {
-    buildGrids(input, input, 20, document.querySelector(".container"));
-  } else {
-    alert("Please enter a number and try again");
-  }
+//resets game and refreshes window
+const reset = document.querySelector(".btn");
+reset.addEventListener("click", (event) => {
+  window.location.reload();
 });
 
-// Generates new grid in same space!
+//Prompts user for grid size input
+function promptAnswer() {
+  let input = prompt("enter the grid size you want between 6 to 64: ");
+  if (input > 5 && input < 64) {
+    buildGrids(input, input, document.querySelector(".container"));
+  } else {
+    do {
+      input = prompt("Please make sure your value is between 6 and 64!");
+    } while (input < 5 || input > 64);
+    buildGrids(input, input, document.querySelector(".container"));
+  }
+}
+
+//Change color of cells
+container.addEventListener("mouseover", (cell) => {
+  cell.target.style.background = "black";
+});
+
+promptAnswer();
